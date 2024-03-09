@@ -1,0 +1,35 @@
+---
+import { db } from "@/db";
+import { course } from "@/schema";
+
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const category = formData.get("category");
+
+  const c = await db
+    .insert(course)
+    .values({ title, description, category })
+    .returning();
+}
+---
+
+<form class="space-y-6" method="post">
+  <label class="grid gap-1">
+    Title
+    <input type="text" name="title" />
+  </label>
+
+  <label class="grid gap-1">
+    Description
+    <input type="text" name="description" />
+  </label>
+
+  <label class="grid gap-1">
+    Category
+    <input type="text" name="category" />
+  </label>
+
+  <button>Save</button>
+</form>

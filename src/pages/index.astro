@@ -1,28 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import type { Session } from "@auth/core/types";
 import { Auth, SignIn, SignOut } from "auth-astro/components";
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
     <div class="container mx-auto">
-      <Auth>
-        {
-          (session) =>
-            session ? (
-              <SignOut class="bg-green-100 text-green-500 font-semibold rounded-lg px-3 py-1 cursor-pointer">
-                Logout
-              </SignOut>
-            ) : (
-              <SignIn
-                class="bg-neutral-100 text-neutral-900 font-semibold rounded-lg px-3 py-1 cursor-pointer"
-                provider="github"
-              >
-                Continue with GitHub
-              </SignIn>
-            )
-        }
-      </Auth>
+      
     </div>
   </main>
 </Layout>
