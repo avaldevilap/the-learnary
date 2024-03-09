@@ -8,6 +8,8 @@ interface ImportMetaEnv {
 	readonly POSTGRES_USER: string;
 	readonly POSTGRES_PASSWORD: string;
 	readonly DATABASE_URL: string;
+	readonly GITHUB_CLIENT_ID: string;
+	readonly GITHUB_CLIENT_SECRET: string;
 }
 
 interface ImportMeta {

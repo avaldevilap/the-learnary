@@ -8,8 +8,8 @@ export default {
 	adapter: DrizzleAdapter(db),
 	providers: [
 		GitHubProvider({
-			clientId: "beb7d9600d0222b7f585",
-			clientSecret: "ab83bf35087ae339cb178c87c97119d1b3c39f17",
+			clientId: import.meta.env.GITHUB_CLIENT_ID,
+			clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
 		}),
 		// PasskeyProvider,
 	],
