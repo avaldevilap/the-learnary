@@ -8,6 +8,27 @@
       "when": 1709852230394,
       "tag": "0000_groovy_korvac",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709997733658,
+      "tag": "0001_glorious_dark_phoenix",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709998664338,
+      "tag": "0002_busy_green_goblin",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1710001289273,
+      "tag": "0003_cultured_karnak",
+      "breakpoints": true
     }
   ]
 }

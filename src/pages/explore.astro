@@ -1,0 +1,31 @@
+---
+import FormCourse from "@/components/FormCourse.astro";
+import { db } from "@/db";
+import Layout from "@/layouts/Layout.astro";
+
+const courses = await db.query.course.findMany();
+---
+
+<Layout title="Explore">
+  <main class="container mx-auto space-y-6 px-6">
+    <section class="max-w-md">
+      <FormCourse />
+    </section>
+
+    <section class="prose">
+      <ul class="space-y-4">
+        {
+          courses.map((course) => (
+            <li>
+              <span class="text-xs uppercase leading-tight">
+                {course.category}
+              </span>
+              <h4 class="text-xl font-semibold">{course.title}</h4>
+              <p class="text-sm text-neutral-500">{course.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,11 +1,20 @@
 import type { AdapterAccount } from "@auth/core/adapters";
 import {
+	date,
 	integer,
+	pgEnum,
 	pgTable,
 	primaryKey,
+	serial,
 	text,
 	timestamp,
 } from "drizzle-orm/pg-core";
+
+export const userTypeEnum = pgEnum("userType", [
+	"student",
+	"instructor",
+	"admin",
+]);
 
 export const users = pgTable("user", {
 	id: text("id").notNull().primaryKey(),
@@ -13,6 +22,7 @@ export const users = pgTable("user", {
 	email: text("email").notNull(),
 	emailVerified: timestamp("emailVerified", { mode: "date" }),
 	image: text("image"),
+	userType: userTypeEnum("userType"),
 });
 
 export const accounts = pgTable(
@@ -58,3 +68,42 @@ export const verificationTokens = pgTable(
 		compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
 	}),
 );
+
+export const course = pgTable("course", {
+	id: serial("id").primaryKey(),
+	title: text("title"),
+	description: text("description"),
+	instructorId: text("instructorId").references(() => users.id, {
+		onDelete: "cascade",
+	}),
+	// (e.g., programming, design, marketing)
+	category: text("category"),
+	// (e.g., beginner, intermediate, advanced)
+	difficultyLevel: text("difficultyLevel"),
+	createdAt: timestamp("createdAt").defaultNow(),
+});
+
+export const content = pgTable("content", {
+	id: serial("id").primaryKey(),
+	courseId: integer("courseId").references(() => course.id, {
+		onDelete: "cascade",
+	}),
+	// (e.g., video, text, quiz)
+	contentType: text("contentType"),
+	title: text("title"),
+	// (text content, video URL, etc.)
+	data: text("data"),
+	// (sequence within the course)
+	order: integer("order"),
+});
+
+export const enrollment = pgTable("enrollment", {
+	id: serial("id").primaryKey(),
+	userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
+	courseId: integer("courseId").references(() => course.id, {
+		onDelete: "cascade",
+	}),
+	enrollmentDate: date("date"),
+	// (percentage completed, optional)
+	progress: integer("progress"),
+});
