@@ -1,4 +1,6 @@
 /// <reference types="astro/client" />
+/// <reference types="simple-stack-form/types" />
+
 interface ImportMetaEnv {
 	readonly AUTH_TRUST_HOST: boolean;
 	readonly AUTH_SECRET: string;

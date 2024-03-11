@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FormCourse from "@/components/FormCourse.astro";
+
+function afterSubmit() {
+  return Astro.redirect("/explore");
+}
+---
+
+<Layout title="New Course">
+  <FormCourse afterSubmit={afterSubmit} />
+</Layout>
