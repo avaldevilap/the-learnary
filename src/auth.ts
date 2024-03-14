@@ -1,11 +1,11 @@
 import { db } from "astro:db";
-import { LibSQLAdapter } from "@lucia-auth/adapter-sqlite";
+import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
 import { GitHub } from "arctic";
 import { Lucia } from "lucia";
 
-const adapter = new LibSQLAdapter(db, {
-	user: "user",
-	session: "session",
+const adapter = new BetterSqlite3Adapter(db, {
+	user: "User",
+	session: "Session",
 });
 
 export const lucia = new Lucia(adapter, {
