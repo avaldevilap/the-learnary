@@ -1,34 +1,36 @@
 ---
-import { db } from "@/db";
-import { course } from "@/schema";
+import { Course, db } from "astro:db";
+import { createForm } from "simple:form";
+import { z } from "zod";
 
-if (Astro.request.method === "POST") {
-  const formData = await Astro.request.formData();
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const category = formData.get("category");
+const formCourse = createForm({
+  title: z.string(),
+  description: z.string(),
+  category: z.string(),
+});
 
-  const c = await db
-    .insert(course)
-    .values({ title, description, category })
-    .returning();
+const result = await Astro.locals.form.getData(formCourse);
+
+if (result?.data) {
+  await db.insert(Course).values(result.data);
 }
 ---
 
 <form class="space-y-6" method="post">
   <label class="grid gap-1">
     Title
-    <input type="text" name="title" />
+    <input {...formCourse.inputProps.title} />
+    {result?.fieldErrors?.title?.map((error) => <p role="alert">{error}</p>)}
   </label>
 
   <label class="grid gap-1">
     Description
-    <input type="text" name="description" />
+    <textarea {...formCourse.inputProps.description}></textarea>
   </label>
 
   <label class="grid gap-1">
     Category
-    <input type="text" name="category" />
+    <input {...formCourse.inputProps.category} />
   </label>
 
   <button>Save</button>

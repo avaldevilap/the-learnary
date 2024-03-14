@@ -1,27 +1,43 @@
 ---
-import type { Session } from "@auth/core/types";
-import { Auth, SignOut } from "auth-astro/components";
+import { Image } from "astro:assets";
+// import type { Session } from "@auth/core/types";
+// import { Auth, SignOut } from "auth-astro/components";
 ---
 
-<header class="container mx-auto flex justify-between p-4">
-  <!-- <div class="text-2xl font-bold">The Learnary</div> -->
-  <img class="w-32" src="/logo.svg" alt="The Learnary" />
+<header class="flex items-center justify-between p-4">
+  <a class="" href="/">
+    <span class="sr-only">The Learnary</span>
+    <Image
+      class="w-32"
+      src="/logo.svg"
+      alt="The Learnary"
+      width={128}
+      height={32}
+      loading="eager"
+    />
+  </a>
   <nav>
-    <ul class="flex gap-4">
-      <li><a href="/explore">Explore</a></li>
+    <ul class="flex items-center gap-4">
+      <li><a href="/explore" data-variant="ghost">Explore</a></li>
       <li>
-        <Auth>
+        <form method="post" action="/logout">
+          <button>Sign out</button>
+        </form>
+        <!-- <Auth>
           {
             (session: Session) =>
               session ? (
-                <SignOut params={{ callbackUrl: "/login", redirect: false }}>
+                <SignOut
+                  data-variant="secondary"
+                  params={{ callbackUrl: "/login", redirect: false }}
+                >
                   Log out
                 </SignOut>
               ) : (
                 <a href="/login">Sign in</a>
               )
           }
-        </Auth>
+        </Auth> -->
       </li>
     </ul>
   </nav>

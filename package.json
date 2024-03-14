@@ -1,35 +1,45 @@
 {
-	"name": "the-learnary",
-	"type": "module",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro check && astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"generate": "bunx drizzle-kit generate:pg",
-		"push": "bunx drizzle-kit push:pg"
-	},
-	"dependencies": {
-		"@astrojs/check": "^0.5.6",
-		"@astrojs/node": "^8.2.3",
-		"@auth/core": "^0.18.6",
-		"@auth/drizzle-adapter": "^0.8.0",
-		"@simplewebauthn/browser": "^9.0.1",
-		"@tailwindcss/vite": "next",
-		"astro": "^4.4.14",
-		"auth-astro": "^4.1.1",
-		"drizzle-orm": "^0.30.0",
-		"pg": "^8.11.3",
-		"postgres": "^3.4.3",
-		"tailwindcss": "next",
-		"typescript": "^5.4.2"
-	},
-	"devDependencies": {
-		"drizzle-kit": "^0.20.14",
-		"prettier": "^3.2.5",
-		"prettier-plugin-astro": "^0.13.0",
-		"prettier-plugin-tailwindcss": "^0.5.12"
-	}
+  "name": "the-learnary",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate": "bunx drizzle-kit generate:pg",
+    "push": "bunx drizzle-kit push:pg"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.5.7",
+    "@astrojs/db": "^0.8.2",
+    "@astrojs/node": "^8.2.3",
+    "@auth/core": "^0.18.6",
+    "@auth/drizzle-adapter": "^0.8.0",
+    "@lucia-auth/adapter-drizzle": "^1.0.3",
+    "@lucia-auth/adapter-sqlite": "^3.0.1",
+    "@simplewebauthn/browser": "^9.0.1",
+    "@tailwindcss/vite": "next",
+    "arctic": "^1.2.1",
+    "astro": "4.5.2",
+    "auth-astro": "^4.1.1",
+    "drizzle-orm": "^0.30.0",
+    "lucia": "^3.1.1",
+    "oslo": "^1.1.3",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3",
+    "simple-stack-form": "^0.1.12",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "next",
+    "typescript": "^5.4.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@astrojs/ts-plugin": "^1.5.3",
+    "drizzle-kit": "^0.20.14",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.12"
+  }
 }
