@@ -1,8 +1,21 @@
 ---
 import { Course, db } from "astro:db";
+import { createForm } from "simple:form";
 import Card from "@/components/Card.astro";
-import FormCourse from "@/components/FormCourse.astro";
 import Layout from "@/layouts/Layout.astro";
+import { z } from "zod";
+
+const formCourse = createForm({
+  title: z.string(),
+  description: z.string(),
+  category: z.string(),
+});
+
+const result = await Astro.locals.form.getData(formCourse);
+
+if (result?.data) {
+  await db.insert(Course).values(result.data);
+}
 
 const courses = await db.select().from(Course);
 ---
@@ -10,7 +23,29 @@ const courses = await db.select().from(Course);
 <Layout title="Explore">
   <main class="container mx-auto w-full space-y-6 px-6">
     <section class="max-w-md">
-      <FormCourse />
+      <form class="space-y-6" method="post">
+        <label class="grid gap-1">
+          Title
+          <input {...formCourse.inputProps.title} />
+          {
+            result?.fieldErrors?.title?.map((error) => (
+              <p role="alert">{error}</p>
+            ))
+          }
+        </label>
+
+        <label class="grid gap-1">
+          Description
+          <textarea {...formCourse.inputProps.description}></textarea>
+        </label>
+
+        <label class="grid gap-1">
+          Category
+          <input {...formCourse.inputProps.category} />
+        </label>
+
+        <button>Save</button>
+      </form>
     </section>
 
     <section class="">
