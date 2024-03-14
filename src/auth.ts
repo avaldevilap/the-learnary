@@ -1,11 +1,19 @@
-import { db } from "astro:db";
-import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
+import { Database } from "bun:sqlite";
+import { dbUrl } from "astro:db";
+import { BunSQLiteAdapter } from "@lucia-auth/adapter-sqlite";
 import { GitHub } from "arctic";
 import { Lucia } from "lucia";
 
-const adapter = new BetterSqlite3Adapter(db, {
-	user: "User",
-	session: "Session",
+console.log("DB_URL", dbUrl);
+
+const db = new Database(
+	// "/Users/avaldevilap/Documents/GitHub/the-learnary/.astro/content.db",
+	dbUrl,
+);
+
+const adapter = new BunSQLiteAdapter(db, {
+	user: "user",
+	session: "session",
 });
 
 export const lucia = new Lucia(adapter, {

@@ -1,7 +1,6 @@
 import { User, db, eq } from "astro:db";
 import { github, lucia } from "@/auth";
 import { OAuth2RequestError } from "arctic";
-import { generateId } from "lucia";
 
 import type { APIContext } from "astro";
 
@@ -41,8 +40,6 @@ export async function GET(context: APIContext): Promise<Response> {
 			);
 			return context.redirect("/");
 		}
-
-		const userId = generateId(15);
 
 		// Replace this with your own DB client.
 		const user = await db
