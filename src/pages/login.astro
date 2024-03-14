@@ -1,16 +1,15 @@
 ---
 import "@/tailwind.css";
-import { SignIn } from "auth-astro/components";
+// import { SignIn } from "auth-astro/components";
 ---
 
-<main class="min-h-dvh grid place-items-center">
-  <div class="bg-emerald-100 p-6 rounded-lg">
-    <SignIn
-      class="bg-neutral-100 text-neutral-900 font-semibold rounded-lg px-3 py-1 cursor-pointer"
-      provider="github"
-      options={{callbackUrl: '/', redirect: false}}
+<main class="grid min-h-dvh place-items-center">
+  <div class="rounded-lg bg-emerald-100 p-6">
+    <a
+      class="cursor-pointer rounded-lg bg-neutral-100 py-1 px-3 font-semibold text-neutral-900"
+      href="/login/github"
     >
       Continue with GitHub
-    </SignIn>
+    </a>
   </div>
 </main>

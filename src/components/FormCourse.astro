@@ -1,5 +1,5 @@
 ---
-import { client } from "@/api";
+import { Course, db } from "astro:db";
 import { createForm } from "simple:form";
 import { z } from "zod";
 
@@ -12,9 +12,7 @@ const formCourse = createForm({
 const result = await Astro.locals.form.getData(formCourse);
 
 if (result?.data) {
-  await client.course.create.mutate(result.data);
-  Astro.props.afterSubmit();
-  // return Astro.redirect("/explore");
+  await db.insert(Course).values(result.data);
 }
 ---
 

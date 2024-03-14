@@ -1,17 +1,16 @@
 ---
+import { Course, db } from "astro:db";
 import Card from "@/components/Card.astro";
 import FormCourse from "@/components/FormCourse.astro";
-import { client } from "@/api";
 import Layout from "@/layouts/Layout.astro";
 
-const courses = await client.course.list.query();
+const courses = await db.select().from(Course);
 ---
 
 <Layout title="Explore">
-  <main class="container mx-auto space-y-6 px-6">
+  <main class="container mx-auto w-full space-y-6 px-6">
     <section class="max-w-md">
-      <!-- <FormCourse /> -->
-      <a href="/courses/new">New Course</a>
+      <FormCourse />
     </section>
 
     <section class="">
@@ -19,13 +18,15 @@ const courses = await client.course.list.query();
         {
           courses.map((course) => (
             <li class="max-w-sm">
-              <Card>
-                <span class="text-xs uppercase leading-tight">
-                  {course.category}
-                </span>
-                <h4 class="text-xl font-semibold">{course.title}</h4>
-                <p class="text-sm text-neutral-500">{course.description}</p>
-              </Card>
+              <a href={`/courses/${course.id}`}>
+                <Card>
+                  <span class="text-xs uppercase leading-tight">
+                    {course.category}
+                  </span>
+                  <h4 class="text-xl font-semibold">{course.title}</h4>
+                  <p class="text-sm text-neutral-500">{course.description}</p>
+                </Card>
+              </a>
             </li>
           ))
         }

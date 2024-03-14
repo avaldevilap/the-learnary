@@ -1,7 +1,7 @@
 ---
-import type { Session } from "@auth/core/types";
 import { Image } from "astro:assets";
-import { Auth, SignOut } from "auth-astro/components";
+// import type { Session } from "@auth/core/types";
+// import { Auth, SignOut } from "auth-astro/components";
 ---
 
 <header class="flex items-center justify-between p-4">
@@ -20,7 +20,10 @@ import { Auth, SignOut } from "auth-astro/components";
     <ul class="flex items-center gap-4">
       <li><a href="/explore" data-variant="ghost">Explore</a></li>
       <li>
-        <Auth>
+        <form method="post" action="/logout">
+          <button>Sign out</button>
+        </form>
+        <!-- <Auth>
           {
             (session: Session) =>
               session ? (
@@ -34,7 +37,7 @@ import { Auth, SignOut } from "auth-astro/components";
                 <a href="/login">Sign in</a>
               )
           }
-        </Auth>
+        </Auth> -->
       </li>
     </ul>
   </nav>
