@@ -1,4 +1,5 @@
 import { column, defineDb, defineTable } from "astro:db";
+import { generateId } from "lucia";
 
 const User = defineTable({
 	columns: {
@@ -15,10 +16,13 @@ const User = defineTable({
 
 const Session = defineTable({
 	columns: {
-		id: column.number({ primaryKey: true }),
-		expiresAt: column.date(),
-		fresh: column.boolean(),
-		userId: column.number({ references: () => User.columns.id }),
+		id: column.text({ default: generateId(15), primaryKey: true }),
+		expires_at: column.date({ default: new Date() }),
+		fresh: column.boolean({ default: true }),
+		user_id: column.number({
+			default: 0,
+			references: () => User.columns.id,
+		}),
 	},
 });
 

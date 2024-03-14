@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-// import type { Session } from "@auth/core/types";
-// import { Auth, SignOut } from "auth-astro/components";
+
+const isAuthenticated = !!Astro.locals.user;
 ---
 
 <header class="flex items-center justify-between p-4">
@@ -20,9 +20,16 @@ import { Image } from "astro:assets";
     <ul class="flex items-center gap-4">
       <li><a href="/explore" data-variant="ghost">Explore</a></li>
       <li>
-        <form method="post" action="/api/logout">
-          <button>Sign out</button>
-        </form>
+        {
+          isAuthenticated ? (
+            <form method="post" action="/api/logout">
+              <button>Sign out</button>
+            </form>
+          ) : (
+            <a href="/login">Sign in</a>
+          )
+        }
+
         <!-- <Auth>
           {
             (session: Session) =>
