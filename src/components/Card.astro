@@ -3,9 +3,9 @@ import type { HTMLAttributes } from "astro/types";
 
 export type Props = HTMLAttributes<"div">;
 
-const { ...attrs } = Astro.props;
+const { class: className, ...attrs } = Astro.props;
 ---
 
-<div class="rounded-xl border p-6" {...attrs}>
+<div class:list={["rounded-xl border p-6", className]} {...attrs}>
   <slot />
 </div>

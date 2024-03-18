@@ -1,36 +1,49 @@
 @layer components {
+  a[data-button],
   button {
     @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex 
-            h-9 items-center justify-center whitespace-nowrap rounded-md 
+            h-12 lg:h-9 items-center justify-center whitespace-nowrap rounded-md 
             py-2 px-4 text-sm 
             font-medium transition-colors focus-visible:ring-1 focus-visible:ring-green-900
             focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50;
   }
 
+  a[data-button][data-variant="secondary"],
   button[data-variant="secondary"] {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm;
   }
 
+  a[data-button][data-variant="outline"],
   button[data-variant="outline"] {
-    @apply border-input hover:bg-accent hover:text-accent-foreground border shadow-sm;
+    @apply bg-white border-input hover:bg-accent text-accent-foreground border shadow-sm;
   }
 
+  a[data-button][data-variant="ghost"],
   button[data-variant="ghost"] {
     @apply hover:bg-accent hover:text-accent-foreground;
   }
+
+  a[data-button][data-variant="link"],
   button[data-variant="link"] {
     @apply text-primary underline-offset-4 hover:underline;
   }
+
+  a[data-button][data-variant="destructive"],
   button[data-variant="destructive"] {
     @apply bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm;
   }
 
+  a[data-button][data-size="sm"],
   button[data-size="sm"] {
     @apply h-8 rounded-md px-3 text-xs;
   }
+
+  a[data-button][data-size="lg"],
   button[data-size="lg"] {
     @apply h-10 rounded-md px-8;
   }
+
+  a[data-button][data-size="icon"],
   button[data-size="icon"] {
     @apply h-9 w-9;
   }

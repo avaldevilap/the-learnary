@@ -21,7 +21,7 @@ const courses = await db.select().from(Course);
 ---
 
 <Layout title="Explore">
-  <main class="container mx-auto w-full space-y-6 px-6">
+  <main class="container mx-auto w-full space-y-6 p-6">
     <section class="max-w-md">
       <form class="space-y-6" method="post">
         <label class="grid gap-1">
@@ -29,7 +29,7 @@ const courses = await db.select().from(Course);
           <input {...formCourse.inputProps.title} />
           {
             result?.fieldErrors?.title?.map((error) => (
-              <p role="alert">{error}</p>
+              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
             ))
           }
         </label>
@@ -37,11 +37,21 @@ const courses = await db.select().from(Course);
         <label class="grid gap-1">
           Description
           <textarea {...formCourse.inputProps.description}></textarea>
+          {
+            result?.fieldErrors?.title?.map((error) => (
+              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
+            ))
+          }
         </label>
 
         <label class="grid gap-1">
           Category
           <input {...formCourse.inputProps.category} />
+          {
+            result?.fieldErrors?.title?.map((error) => (
+              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
+            ))
+          }
         </label>
 
         <button>Save</button>
@@ -69,3 +79,18 @@ const courses = await db.select().from(Course);
     </section>
   </main>
 </Layout>
+
+<script>
+  import autoAnimate from "@formkit/auto-animate";
+
+  document.querySelectorAll('li').forEach((item) => {
+    autoAnimate(item)
+  })
+  document.querySelectorAll('label').forEach((item) => {
+    console.log(item)
+    autoAnimate(item)
+  })
+  document.querySelectorAll('p[role=alert]').forEach((item: any) => {
+    autoAnimate(item)
+  })
+</script>

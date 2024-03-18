@@ -4,6 +4,12 @@ import { OAuth2RequestError } from "arctic";
 
 import type { APIContext } from "astro";
 
+type GitHubUser = {
+  id: string;
+  login: string;
+  avatar_url: string;
+};
+
 export async function GET(context: APIContext): Promise<Response> {
   const code = context.url.searchParams.get("code");
   const state = context.url.searchParams.get("state");
@@ -22,6 +28,7 @@ export async function GET(context: APIContext): Promise<Response> {
       },
     });
     const githubUser: GitHubUser = await githubUserResponse.json();
+    console.log(githubUser);
 
     // Replace this with your own DB client.
     const existingUser = await db
@@ -31,7 +38,7 @@ export async function GET(context: APIContext): Promise<Response> {
       .get();
 
     if (existingUser) {
-      const session = await lucia.createSession(String(existingUser.id), {});
+      const session = await lucia.createSession(existingUser.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
       context.cookies.set(
         sessionCookie.name,
@@ -47,11 +54,12 @@ export async function GET(context: APIContext): Promise<Response> {
       .values({
         githubId: githubUser.id,
         githubUsername: githubUser.login,
+        githubAvatar: githubUser.avatar_url,
       })
       .returning()
       .get();
 
-    const session = await lucia.createSession(String(user.id), {});
+    const session = await lucia.createSession(user.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     context.cookies.set(
       sessionCookie.name,
@@ -72,9 +80,4 @@ export async function GET(context: APIContext): Promise<Response> {
       status: 500,
     });
   }
-}
-
-interface GitHubUser {
-  id: string;
-  login: string;
 }
