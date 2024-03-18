@@ -1,20 +1,25 @@
+import db from "@astrojs/db";
 import node from "@astrojs/node";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import simpleStackForm from "simple-stack-form";
-import db from "@astrojs/db";
 
-import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
+// import sentry from "@sentry/astro";
+// import spotlightjs from "@spotlightjs/astro";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: node({
-    mode: "standalone"
+    mode: "standalone",
   }),
-  integrations: [simpleStackForm(), db(), sentry(), spotlightjs()],
+  integrations: [
+    simpleStackForm(),
+    db(),
+    // sentry(),
+    // spotlightjs()
+  ],
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });

@@ -1,20 +1,9 @@
-import { Database } from "bun:sqlite";
-import { dbUrl } from "astro:db";
-import { BunSQLiteAdapter } from "@lucia-auth/adapter-sqlite";
+import { Session, User, db } from "astro:db";
 import { GitHub } from "arctic";
 import { Lucia } from "lucia";
+import { AstroDBAdapter } from "lucia-adapter-astrodb";
 
-console.log("DB_URL", dbUrl);
-
-const db = new Database(
-  // "/Users/avaldevilap/Documents/GitHub/the-learnary/.astro/content.db",
-  dbUrl,
-);
-
-const adapter = new BunSQLiteAdapter(db, {
-  user: "user",
-  session: "session",
-});
+const adapter = new AstroDBAdapter(db, User, Session);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {

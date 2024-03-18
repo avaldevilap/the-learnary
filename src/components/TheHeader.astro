@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 const isAuthenticated = !!Astro.locals.user;
 ---
 
-<header class="flex items-center justify-between p-4">
+<header class="flex items-center justify-between p-4 border-b">
   <a class="" href="/">
     <span class="sr-only">The Learnary</span>
     <Image
@@ -29,22 +29,6 @@ const isAuthenticated = !!Astro.locals.user;
             <a href="/login">Sign in</a>
           )
         }
-
-        <!-- <Auth>
-          {
-            (session: Session) =>
-              session ? (
-                <SignOut
-                  data-variant="secondary"
-                  params={{ callbackUrl: "/login", redirect: false }}
-                >
-                  Log out
-                </SignOut>
-              ) : (
-                <a href="/login">Sign in</a>
-              )
-          }
-        </Auth> -->
       </li>
     </ul>
   </nav>
