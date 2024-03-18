@@ -5,7 +5,7 @@ import { OAuth2RequestError } from "arctic";
 import type { APIContext } from "astro";
 
 type GitHubUser = {
-  id: string;
+  id: number;
   login: string;
   avatar_url: string;
 };
