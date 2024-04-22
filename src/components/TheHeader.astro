@@ -2,34 +2,73 @@
 import { Image } from "astro:assets";
 
 const isAuthenticated = !!Astro.locals.user;
+console.log(Astro.locals);
 ---
 
-<header class="flex items-center justify-between p-4 border-b">
-  <a class="" href="/">
-    <span class="sr-only">The Learnary</span>
-    <Image
-      class="w-32"
-      src="/logo.svg"
-      alt="The Learnary"
-      width={128}
-      height={32}
-      loading="eager"
-    />
-  </a>
-  <nav>
-    <ul class="flex items-center gap-4">
-      <li><a href="/explore" data-variant="ghost">Explore</a></li>
-      <li>
-        {
-          isAuthenticated ? (
-            <form method="post" action="/api/logout">
-              <button>Sign out</button>
-            </form>
-          ) : (
-            <a href="/login">Sign in</a>
-          )
-        }
-      </li>
-    </ul>
-  </nav>
+<header class="p-4 border-b">
+    <nav class="flex items-center justify-between max-w-[90rem] mx-auto">
+        <a class="" href="/">
+            <span class="sr-only">The Learnary</span>
+            <Image
+                src="/logo.svg"
+                alt="The Learnary"
+                width={128}
+                height={32}
+                loading="eager"
+            />
+        </a>
+        <ul class="flex items-center gap-6">
+            <li><a href="/explore" data-variant="ghost">Explore</a></li>
+            <li>
+                {
+                    isAuthenticated ? (
+                        <form method="post" action="/api/logout">
+                            <button>Sign out</button>
+                        </form>
+                    ) : (
+                        <a href="/login">Sign in</a>
+                    )
+                }
+            </li>
+        </ul>
+    </nav>
 </header>
+
+<style>
+    header {
+        padding: var(--size-3);
+        background-color: white;
+        box-shadow: var(--shadow-1);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 90rem;
+        margin-inline: auto;
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: var(--size-3);
+
+            li {
+                a {
+                    color: black;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+
+                &:last-child > a {
+                    padding-inline: var(--size-3);
+                    padding-block: var(--size-1);
+                    background-color: wheat;
+                    border-radius: var(--size-3);
+                }
+            }
+        }
+    }
+</style>

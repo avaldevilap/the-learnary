@@ -6,9 +6,9 @@ import Layout from "@/layouts/Layout.astro";
 import { z } from "zod";
 
 const formCourse = createForm({
-  title: z.string(),
-  description: z.string(),
-  category: z.string(),
+  title: z.string({ required_error: "Title is required" }),
+  description: z.string({ required_error: "Description is required" }),
+  category: z.string({ required_error: "Category is required" }),
 });
 
 const result = await Astro.locals.form.getData(formCourse);
@@ -21,56 +21,56 @@ const courses = await db.select().from(Course);
 ---
 
 <Layout title="Explore">
-  <main class="container mx-auto w-full space-y-6 p-6">
+  <main class="page-container">
     <section class="max-w-md">
       <form class="space-y-6" method="post">
-        <label class="grid gap-1">
-          Title
-          <input {...formCourse.inputProps.title} />
+        <label class="form-control">
+          <span class="form-label">Title</span>
+          <input class:list={["form-input", {'form-input--invalid': result?.fieldErrors?.title}]} {...formCourse.inputProps.title} />
           {
             result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
+              <p class="form-error" role="alert">{error}</p>
             ))
           }
         </label>
 
-        <label class="grid gap-1">
-          Description
-          <textarea {...formCourse.inputProps.description}></textarea>
+        <label class="form-control">
+          <span class="form-label">Description</span>
+          <textarea class:list={["form-textarea", {'form-input--invalid': result?.fieldErrors?.description}]} {...formCourse.inputProps.description}></textarea>
           {
-            result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
+            result?.fieldErrors?.description?.map((error) => (
+              <p class="form-error" role="alert">{error}</p>
             ))
           }
         </label>
 
-        <label class="grid gap-1">
-          Category
-          <input {...formCourse.inputProps.category} />
+        <label class="form-control">
+          <span class="form-label error">Category</span>
+          <input class:list={["form-input", {'form-input--invalid': result?.fieldErrors?.category}]} {...formCourse.inputProps.category} />
           {
-            result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
+            result?.fieldErrors?.category?.map((error) => (
+              <p class="form-error" role="alert">{error}</p>
             ))
           }
         </label>
 
-        <button>Save</button>
+        <button data-variant="primary">Save</button>
       </form>
     </section>
 
-    <section class="">
-      <ul class="flex flex-wrap gap-4">
+    <section class="" style={{marginTop: 'var(--size-10)'}}>
+      <ul class="list">
         {
           courses.map((course) => (
-            <li class="max-w-sm">
-              <a href={`/courses/${course.id}`}>
-                <Card>
-                  <span class="text-xs uppercase leading-tight">
+            <li class="">
+              <a class="card" href={`/courses/${course.id}`}>
+                <div class="card__content">
+                  <p class="">
                     {course.category}
-                  </span>
-                  <h4 class="text-xl font-semibold">{course.title}</h4>
-                  <p class="text-sm text-neutral-500">{course.description}</p>
-                </Card>
+                  </p>
+                  <h4 class="">{course.title}</h4>
+                  <p class="">{course.description}</p>
+                </div>
               </a>
             </li>
           ))
@@ -80,17 +80,25 @@ const courses = await db.select().from(Course);
   </main>
 </Layout>
 
-<script>
-  import autoAnimate from "@formkit/auto-animate";
+<style>
+  form {
+    max-width: var(--size-15);
+  }
 
-  document.querySelectorAll('li').forEach((item) => {
-    autoAnimate(item)
-  })
-  document.querySelectorAll('label').forEach((item) => {
-    console.log(item)
-    autoAnimate(item)
-  })
-  document.querySelectorAll('p[role=alert]').forEach((item: any) => {
-    autoAnimate(item)
-  })
-</script>
+  form > * + * {
+    margin-top: var(--size-5);
+  }
+
+  .list {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: var(--size-3);
+      padding-block: var(--size-3);
+    }
+
+  @media (width >= 48rem) {
+    .list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
