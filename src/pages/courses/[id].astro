@@ -1,7 +1,12 @@
 ---
+import { Course, db } from "astro:db";
 import Layout from "@/layouts/Layout.astro";
+
+const course = await db.select().from(Course).get();
 ---
 
-<Layout title="kjbnkn">
-<h1>kjdhcjhsjhd</h1>
+<Layout title={course?.title ?? 'The Learnary'}>
+  <main class="page-container">
+    <h1>{course?.title}</h1>
+  </main>
 </Layout>
