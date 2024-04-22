@@ -3,6 +3,7 @@ import { github, lucia } from "@/auth";
 import { OAuth2RequestError } from "arctic";
 
 import type { APIContext } from "astro";
+import { generateId } from "lucia";
 
 type GitHubUser = {
   id: number;
@@ -28,9 +29,7 @@ export async function GET(context: APIContext): Promise<Response> {
       },
     });
     const githubUser: GitHubUser = await githubUserResponse.json();
-    console.log(githubUser);
 
-    // Replace this with your own DB client.
     const existingUser = await db
       .select()
       .from(User)
@@ -48,18 +47,16 @@ export async function GET(context: APIContext): Promise<Response> {
       return context.redirect("/");
     }
 
-    // Replace this with your own DB client.
-    const user = await db
-      .insert(User)
-      .values({
-        githubId: githubUser.id,
-        githubUsername: githubUser.login,
-        githubAvatar: githubUser.avatar_url,
-      })
-      .returning()
-      .get();
+    const userId = generateId(15);
 
-    const session = await lucia.createSession(user.id, {});
+    await db.insert(User).values({
+      id: userId,
+      githubId: githubUser.id,
+      githubUsername: githubUser.login,
+      githubAvatar: githubUser.avatar_url,
+    });
+
+    const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     context.cookies.set(
       sessionCookie.name,

@@ -1,11 +1,27 @@
 ---
-import { dbUrl } from "astro:db";
+import FeaturedList from "@/components/featured-list.astro";
 import Layout from "@/layouts/Layout.astro";
-console.log(dbUrl);
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <div class="container mx-auto"></div>
+<Layout title="The Learnary">
+  <main class="page-container" role="main">
+    <FeaturedList
+      title="Most Popular Certificates"
+      subtitle="Specializations and Professional Certificates"
+      description="Explore our most popular programs, get job-ready for an in-demand career."
+    >
+        { ["https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345"].map((img) =>
+          <li class="card">
+            <div class="card__heading">
+              <img src={img} alt="" />
+            </div>
+
+            <div class="card__content">
+              <h6>Google Data Analytics</h6>
+              <p>Professional Certificate</p>
+            </div>
+          </li>)
+        }
+    </FeaturedList>
   </main>
 </Layout>
