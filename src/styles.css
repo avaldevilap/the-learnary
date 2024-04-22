@@ -2,6 +2,7 @@
 @import "https://unpkg.com/open-props/normalize.light.min.css";
 
 :root {
+    --brand: wheat;
     --color-primary: wheat;
     --color-border: hsl(210 16.7% 95.3%);
 }
