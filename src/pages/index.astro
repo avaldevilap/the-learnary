@@ -1,4 +1,5 @@
 ---
+import Card from "@/components/card.astro";
 import FeaturedList from "@/components/featured-list.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
@@ -11,15 +12,17 @@ import Layout from "@/layouts/Layout.astro";
       description="Explore our most popular programs, get job-ready for an in-demand career."
     >
         { ["https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345"].map((img) =>
-          <li class="card">
-            <div class="card__heading">
-              <img src={img} alt="" />
-            </div>
+          <li>
+            <Card>
+              <div class="card__heading">
+                <img src={img} alt="" />
+              </div>
 
-            <div class="card__content">
-              <h6>Google Data Analytics</h6>
-              <p>Professional Certificate</p>
-            </div>
+              <div class="card__content">
+                <h4>Google Data Analytics</h4>
+                <p><small>Professional Certificate</small></p>
+              </div>
+            </Card>
           </li>)
         }
     </FeaturedList>
