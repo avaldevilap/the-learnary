@@ -1,0 +1,25 @@
+---
+interface Props {
+  messages?: string[];
+}
+
+const { messages = [] } = Astro.props;
+---
+
+{
+  messages.map((error) => (
+    <p role="alert">{error}</p>
+  ))
+}
+
+<style>
+  p[role=alert] {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: tomato;
+    opacity: 1;
+    display: block;
+    transition: display 0.5s, opacity 0.5s;
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+type Props = {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+};
+
+const { title, subtitle, description } = Astro.props;
+---
+
+<section class="container">
+  <div class="heading">
+    <h5 class="">{subtitle}</h5>
+    <h4 class="">{title}</h4>
+    <p class="">{description}</p>
+  </div>
+
+  <div class="list" role="list">
+    <slot/>
+  </div>
+</section>
+
+<style>
+  .heading {
+    padding-block: 0.75rem;
+    min-width: 0;
+
+    h5 {
+      font-size: 1.125rem;
+    }
+
+    h4 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+  }
+
+  @media (width >= 48rem) {
+    .list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

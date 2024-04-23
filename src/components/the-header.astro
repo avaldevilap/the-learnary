@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+import Button from "@/components/ui/button.astro";
+
+const isAuthenticated = !!Astro.locals.user;
+---
+
+<header class="">
+    <nav class="">
+        <a class="" href="/">
+            <span class="sr-only">The Learnary</span>
+            <Image
+                src="/logo.svg"
+                alt="The Learnary"
+                width={128}
+                height={32}
+                loading="eager"
+            />
+        </a>
+        <ul class="">
+            <li><Button variant="ghost" as="a" href="/explore">Explore</Button></li>
+            <li>
+                {
+                    isAuthenticated ? (
+                        <form method="post" action="/api/logout">
+                            <Button variant="primary">Sign out</Button>
+                        </form>
+                    ) : (
+                        <Button variant="primary" as="a" href="/login">Sign in</Button>
+                    )
+                }
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+    header {
+        padding: 1rem;
+        background-color: white;
+        box-shadow: var(--shadow);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 90rem;
+        margin-inline: auto;
+
+        ul {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            li {
+                a {
+                    color: black;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+
+                /* &:last-child > a {
+                    padding-inline: 1rem;
+                    padding-block: 0.5rem;
+                    background-color: wheat;
+                    border-radius: 1rem;
+                } */
+            }
+        }
+    }
+</style>

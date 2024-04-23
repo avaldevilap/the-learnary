@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary" | "outline" | "ghost";
+
+interface ButtonProps extends HTMLAttributes<"button"> {
+  variant?: Variant;
+  as?: "button";
+}
+
+interface AnchorProps extends HTMLAttributes<"a"> {
+  variant?: Variant;
+  as?: "a";
+}
+
+export type Props = ButtonProps | AnchorProps;
+
+const {
+  class: className,
+  variant,
+  as: Component = "button",
+  ...attrs
+} = Astro.props;
+---
+
+<Component class:list={["btn", className, variant ? `btn--${variant}` : '']} {...attrs}>
+  <slot/>
+</Component>
+
+<style>
+  .btn {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .btn--primary {
+      background-color: wheat;
+  }
+
+  .btn--outline {
+      background-color: wheat;
+  }
+
+  .btn--ghost {
+    &:hover{
+      background-color: wheat;
+    }
+  }
+</style>

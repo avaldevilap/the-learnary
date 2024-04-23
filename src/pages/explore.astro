@@ -1,7 +1,12 @@
 ---
 import { Course, db } from "astro:db";
 import { createForm } from "simple:form";
-import Card from "@/components/Card.astro";
+import Button from "@/components/ui/button.astro";
+import Card from "@/components/ui/card.astro";
+import ErrorMessage from "@/components/ui/error-message.astro";
+import Input from "@/components/ui/input.astro";
+import Label from "@/components/ui/label.astro";
+import Textarea from "@/components/ui/textarea.astro";
 import Layout from "@/layouts/Layout.astro";
 import { z } from "zod";
 
@@ -21,55 +26,45 @@ const courses = await db.select().from(Course);
 ---
 
 <Layout title="Explore">
-  <main class="container mx-auto w-full space-y-6 p-6">
-    <section class="max-w-md">
-      <form class="space-y-6" method="post">
-        <label class="grid gap-1">
-          Title
-          <input {...formCourse.inputProps.title} />
-          {
-            result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
-            ))
-          }
-        </label>
+  <main class="page-container">
+    <section class="">
+      <form class="" method="post">
+        <Label>
+          <span>Title</span>
+          <Input error={!!result?.fieldErrors?.title} {...formCourse.inputProps.title} />
+          <ErrorMessage messages={result?.fieldErrors?.title}/>
+        </Label>
 
-        <label class="grid gap-1">
-          Description
-          <textarea {...formCourse.inputProps.description}></textarea>
-          {
-            result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
-            ))
-          }
-        </label>
+        <Label>
+          <span>Description</span>
+          <Textarea error={!!result?.fieldErrors?.description} {...formCourse.inputProps.description}/>
+          <ErrorMessage messages={result?.fieldErrors?.description}/>
+        </Label>
 
-        <label class="grid gap-1">
-          Category
-          <input {...formCourse.inputProps.category} />
-          {
-            result?.fieldErrors?.title?.map((error) => (
-              <p class="text-xs font-semibold text-destructive" role="alert">{error}</p>
-            ))
-          }
-        </label>
+        <Label>
+          <span>Category</span>
+          <Input error={!!result?.fieldErrors?.category} {...formCourse.inputProps.category} />
+          <ErrorMessage messages={result?.fieldErrors?.description}/>
+        </Label>
 
-        <button>Save</button>
+        <Button variant="primary">Save</Button>
       </form>
     </section>
 
-    <section class="">
-      <ul class="flex flex-wrap gap-4">
+    <section class="" style={{marginTop: '10rem'}}>
+      <ul class="list">
         {
           courses.map((course) => (
-            <li class="max-w-sm">
+            <li class="">
               <a href={`/courses/${course.id}`}>
                 <Card>
-                  <span class="text-xs uppercase leading-tight">
-                    {course.category}
-                  </span>
-                  <h4 class="text-xl font-semibold">{course.title}</h4>
-                  <p class="text-sm text-neutral-500">{course.description}</p>
+                  <Fragment slot="content">
+                    <p class="">
+                      {course.category}
+                    </p>
+                    <h4 class="">{course.title}</h4>
+                    <p class="">{course.description}</p>
+                  </Fragment>
                 </Card>
               </a>
             </li>
@@ -80,17 +75,23 @@ const courses = await db.select().from(Course);
   </main>
 </Layout>
 
-<script>
-  import autoAnimate from "@formkit/auto-animate";
+<style>
+  form {
+    max-width: 30rem;
+  }
 
-  document.querySelectorAll('li').forEach((item) => {
-    autoAnimate(item)
-  })
-  document.querySelectorAll('label').forEach((item) => {
-    console.log(item)
-    autoAnimate(item)
-  })
-  document.querySelectorAll('p[role=alert]').forEach((item: any) => {
-    autoAnimate(item)
-  })
-</script>
+  form > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
