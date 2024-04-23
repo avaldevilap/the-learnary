@@ -36,9 +36,9 @@ console.log(Astro.locals);
 
 <style>
     header {
-        padding: var(--size-3);
+        padding: 1rem;
         background-color: white;
-        box-shadow: var(--shadow-1);
+        box-shadow: var(--shadow);
     }
 
     nav {
@@ -51,7 +51,7 @@ console.log(Astro.locals);
         ul {
             display: flex;
             align-items: center;
-            gap: var(--size-3);
+            gap: 1rem;
 
             li {
                 a {
@@ -63,10 +63,10 @@ console.log(Astro.locals);
                 }
 
                 &:last-child > a {
-                    padding-inline: var(--size-3);
-                    padding-block: var(--size-1);
+                    padding-inline: 1rem;
+                    padding-block: 0.5rem;
                     background-color: wheat;
-                    border-radius: var(--size-3);
+                    border-radius: 1rem;
                 }
             }
         }

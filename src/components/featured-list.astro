@@ -10,8 +10,8 @@ const { title, subtitle, description } = Astro.props;
 
 <section class="container">
   <div class="heading">
-    <h6 class="">{subtitle}</h6>
-    <h3 class="">{title}</h3>
+    <h5 class="">{subtitle}</h5>
+    <h4 class="">{title}</h4>
     <p class="">{description}</p>
   </div>
 
@@ -21,17 +21,25 @@ const { title, subtitle, description } = Astro.props;
 </section>
 
 <style>
-    .heading {
-      padding-block: var(--size-2);
-      min-width: 0;
+  .heading {
+    padding-block: 0.75rem;
+    min-width: 0;
+
+    h5 {
+      font-size: 1.125rem;
     }
 
-    .list {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: var(--size-3);
-      padding-block: var(--size-3);
+    h4 {
+      font-size: 1.75rem;
     }
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+  }
 
   @media (width >= 48rem) {
     .list {
