@@ -1,11 +1,7 @@
 import db from "@astrojs/db";
 import node from "@astrojs/node";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import simpleStackForm from "simple-stack-form";
-
-// import sentry from "@sentry/astro";
-// import spotlightjs from "@spotlightjs/astro";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,13 +9,10 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
-  integrations: [
-    simpleStackForm(),
-    db(),
-    // sentry(),
-    // spotlightjs()
-  ],
+  integrations: [simpleStackForm(), db()],
   vite: {
-    plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ["oslo", "astro:db"],
+    },
   },
 });

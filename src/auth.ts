@@ -3,7 +3,7 @@ import { GitHub } from "arctic";
 import { Lucia } from "lucia";
 import { AstroDBAdapter } from "lucia-adapter-astrodb";
 
-const adapter = new AstroDBAdapter(db, User, Session);
+const adapter = new AstroDBAdapter(db, Session, User);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {

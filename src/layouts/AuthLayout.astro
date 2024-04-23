@@ -1,7 +1,5 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import TheFooter from "@/components/the-footer.astro";
-import TheHeader from "@/components/the-header.astro";
 import "@/styles/index.css";
 
 interface Props {
@@ -23,12 +21,6 @@ const { title } = Astro.props;
         <ViewTransitions />
     </head>
     <body>
-        <TheHeader />
-
-        <div id="root">
-            <slot />
-        </div>
-        
-        <TheFooter />
+        <slot />
     </body>
 </html>

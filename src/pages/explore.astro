@@ -11,9 +11,9 @@ import Layout from "@/layouts/Layout.astro";
 import { z } from "zod";
 
 const formCourse = createForm({
-  title: z.string(),
-  description: z.string(),
-  category: z.string(),
+  title: z.string({ required_error: "Title is required" }),
+  description: z.string({ required_error: "Description is required" }),
+  category: z.string({ required_error: "Category is required" }),
 });
 
 const result = await Astro.locals.form.getData(formCourse);

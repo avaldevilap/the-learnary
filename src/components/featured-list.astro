@@ -15,9 +15,9 @@ const { title, subtitle, description } = Astro.props;
     <p class="">{description}</p>
   </div>
 
-  <div class="list" role="list">
+  <ul class="list">
     <slot/>
-  </div>
+  </ul>
 </section>
 
 <style>
