@@ -18,7 +18,9 @@ const isAuthenticated = !!Astro.locals.user;
             />
         </a>
         <ul class="">
-            <li><Button variant="ghost" as="a" href="/explore">Explore</Button></li>
+            <li>
+                <Button variant="ghost" as="a" href="/explore">Explore</Button>
+            </li>
             <li>
                 {
                     isAuthenticated ? (
@@ -45,7 +47,7 @@ const isAuthenticated = !!Astro.locals.user;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        max-width: 90rem;
+        max-width: 75rem;
         margin-inline: auto;
 
         ul {
@@ -61,13 +63,6 @@ const isAuthenticated = !!Astro.locals.user;
                         text-decoration: none;
                     }
                 }
-
-                /* &:last-child > a {
-                    padding-inline: 1rem;
-                    padding-block: 0.5rem;
-                    background-color: wheat;
-                    border-radius: 1rem;
-                } */
             }
         }
     }
