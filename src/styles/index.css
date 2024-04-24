@@ -36,10 +36,9 @@ a {
 /* Components */
 .page-container {
     width: 100%;
-    max-width: 90rem;
+    max-width: 75rem;
     margin-inline: auto;
-    padding-block: 3rem;
-    padding-inline: 1rem;
+    padding: 3rem 1rem;
     container-name: page-container;
 }
 
