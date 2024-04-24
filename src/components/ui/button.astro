@@ -1,26 +1,11 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLTag, Polymorphic } from "astro/types";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost";
 
-interface ButtonProps extends HTMLAttributes<"button"> {
-  variant?: Variant;
-  as?: "button";
-}
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag; variant?: Variant }>;
 
-interface AnchorProps extends HTMLAttributes<"a"> {
-  variant?: Variant;
-  as?: "a";
-}
-
-export type Props = ButtonProps | AnchorProps;
-
-const {
-  class: className,
-  variant,
-  as: Component = "button",
-  ...attrs
-} = Astro.props;
+const { class: className, variant, as: Component, ...attrs } = Astro.props;
 ---
 
 <Component class:list={["btn", className, variant ? `btn--${variant}` : '']} {...attrs}>
