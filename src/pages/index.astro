@@ -1,7 +1,14 @@
 ---
+import Card from "@/components/card.astro";
 import FeaturedList from "@/components/featured-list.astro";
-import Card from "@/components/ui/card.astro";
 import Layout from "@/layouts/Layout.astro";
+
+const images = [
+  "https://picsum.photos/seed/123/500.webp",
+  "https://picsum.photos/seed/546/500.webp",
+  "https://picsum.photos/seed/098/500.webp",
+  "https://picsum.photos/seed/867/500.webp",
+];
 ---
 
 <Layout title="The Learnary">
@@ -11,7 +18,7 @@ import Layout from "@/layouts/Layout.astro";
       subtitle="Specializations and Professional Certificates"
       description="Explore our most popular programs, get job-ready for an in-demand career."
     >
-        { ["https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345", "https://picsum.photos/345"].map((img) =>
+        { images.map((img) =>
             <Card role="listitem">
               <Fragment slot="header">
                 <img src={img} alt="" />
